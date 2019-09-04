@@ -1,0 +1,28 @@
+class Solution: 
+    def longestPalindrome(self, s: str) -> str:
+        if len(s)==0:
+            return ""
+        if len(s)==1:
+            return s[0]
+        Palindrome_Num = 0
+        Palindrome = s[0]
+        for i in range(len(s)):
+            Palindrome_Even, Palindrome_Even_Num = self.CheckPalindrome(s,i,i)
+            Palindrome_Odd, Palindrome_Odd_Num = self.CheckPalindrome(s,i,i+1)
+            if Palindrome_Even_Num > Palindrome_Num:
+                Palindrome_Num = Palindrome_Even_Num
+                Palindrome = Palindrome_Even
+            if Palindrome_Odd_Num > Palindrome_Num:
+                Palindrome_Num = Palindrome_Odd_Num
+                Palindrome = Palindrome_Odd
+        print(Palindrome_Num)
+        return Palindrome
+        
+    
+    def CheckPalindrome(self, string, left, right):
+        R = right
+        L = left
+        while R<len(string) and L>=0 and string[R]==string[L]:
+            R += 1
+            L -= 1
+        return string[L+1:R],R-L-1
