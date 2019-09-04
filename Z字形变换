@@ -1,0 +1,14 @@
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        if len(s)<numRows or numRows==1:
+            return s
+        Per = 2*numRows-2
+        Result = []
+        for i in range(numRows):
+            for j in range(0,len(s),Per):
+                if j+i < len(s):
+                    Result.append(s[j+i])
+                    if(i!=0 and i!=(numRows-1) and j+Per-i<len(s)):
+                        Result.append(s[j+Per-i])
+        return "".join(Result)
+            
