@@ -1,0 +1,28 @@
+class Solution:
+    def myAtoi(self, str: str) -> int:
+        if not str or str=="":
+            return 0 
+        i = 0
+        flag = []
+        num = []
+        Result = 0
+        while i<len(str) and str[i]==' ':
+            i += 1
+        if i<len(str) and (str[i]=='+' or str[i]=='-'):
+            flag = str[i]
+            i += 1
+        if i<len(str) and str[i]>='0' and str[i]<='9':
+            while i<len(str) and str[i]>='0' and str[i]<='9':
+                num.append(str[i])
+                i += 1
+            Result = int(''.join(num))
+            if flag == '-':
+                Result = -Result
+            if Result < -2**31:
+                return -2147483648
+            elif Result > 2**31-1:
+                return 2147483647
+            else:
+                return Result         
+        else:
+            return 0
