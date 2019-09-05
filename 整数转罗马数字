@@ -1,0 +1,21 @@
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        Data = []
+        Roman = ['I','V','X','L','C','D','M']
+        Result = []
+        while(num > 0):
+            Data.append(num % 10)
+            num = num // 10
+        #Data = Data[::-1]
+        for i in range(len(Data)-1,-1,-1):
+            if Data[i] < 4:
+                Result += Data[i]*Roman[2*i]
+            elif Data[i] == 4:
+                Result += Roman[2*i] + Roman[2*i + 1]
+            elif Data[i] == 5:
+                Result += Roman[2*i+1]
+            elif Data[i] == 9:
+                Result += Roman[2*i] + Roman[2*i + 2]
+            else:
+                Result += Roman[2*i + 1] + (Data[i]-5)*Roman[2*i]
+        return ''.join(Result)
