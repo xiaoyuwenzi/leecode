@@ -1,0 +1,29 @@
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        # nums = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+        # romans = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
+        # Result = 0
+        # i = 0
+        # while i<len(s):
+        #     if s[i:i+2] in romans:
+        #         Result += nums[romans.index(s[i:i+2])]
+        #         i += 2
+        #     elif s[i:i+1] in romans:
+        #         Result += nums[romans.index(s[i:i+1])]
+        #         i += 1
+        # return Result
+
+        Roman_Map = {'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}
+        i = 0
+        Result = 0
+        while i<len(s)-1:
+            if Roman_Map[s[i+1]]>Roman_Map[s[i]]:
+                Result += Roman_Map[s[i+1]] - Roman_Map[s[i]]
+                i+=2
+            else :
+                Result += Roman_Map[s[i]]
+                i +=1
+            print(Result)
+        if i < len(s):
+            Result += Roman_Map[s[i]]
+        return Result
