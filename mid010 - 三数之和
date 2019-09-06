@@ -1,0 +1,50 @@
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        # nums.sort()
+        # if nums==[] or nums[0]>0:
+        #     return []
+        # Result = []
+        # L = 0
+        # R = 0
+        # for k in range(len(nums)-1):
+        #     L = k + 1
+        #     R = len(nums) - 1
+        #     if k>0 and nums[k]==nums[k-1]:
+        #         continue
+        #     while L < R:
+        #         if nums[k]+nums[L]+nums[R]==0:
+        #             Result.append([nums[k],nums[L],nums[R]])
+        #             L += 1
+        #             R -= 1
+        #             while L<R and nums[L]==nums[L-1]:L += 1
+        #             while L<R and nums[R]==nums[R+1]:R -= 1
+        #         elif nums[k]+nums[L]+nums[R]<0:
+        #             L += 1 
+        #             while L<R and nums[L]==nums[L-1]:
+        #                 L += 1
+        #         elif nums[k]+nums[L]+nums[R]>0:
+        #             R -= 1
+        #             while L<R and nums[R] == nums[R+1]:
+        #                 R -= 1
+        # return Result   
+        nums_hash = {}
+        result = list()
+        nums.sort()
+        for num in nums:        #建立hash矩阵，获取每个字符数量
+            nums_hash[num] = nums_hash.get(num, 0) + 1
+        
+        if 0 in nums_hash and nums_hash[0] >= 3:   #全为0特殊情况
+            result.append([0, 0, 0])
+
+        neg = list(filter(lambda x: x < 0, nums_hash))  #分为小于0部分
+        pos = list(filter(lambda x: x>= 0, nums_hash))  #分为大于0部分
+        print(neg)
+        for i in neg:
+            for j in pos:
+                dif = 0 - i - j
+                if dif in nums_hash:
+                    if dif in (i, j) and nums_hash[dif] >= 2:   #差值与正负值相等时，需保证该值数量大于1
+                        result.append([i, j, dif])
+                    if dif < i or dif > j:                      #差值位于正负只之间，则直接输出
+                        result.append([i, j, dif])
+        return result
