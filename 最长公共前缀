@@ -1,0 +1,21 @@
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        # if strs==[] :      #如果为空，返回空
+        #     return ""
+        # for i in range(len(strs[0])):  #第一个字符串取字母
+        #     j = 1
+        #     while j < len(strs):       #循环每一个字符串，判断前缀是否相同，如果不同则返回结果
+        #         if strs[0][0:i+1] not in strs[j][0:i+1]:
+        #             return strs[0][0:i]
+        #         j += 1
+        # return strs[0]                 #前缀均相同，则返回第一个字符
+    
+    
+        L = zip(*strs)       #取出每一个str的相同列，形成list       
+        r = [len(set(c))==1 for c in L ] + [False]   #判断每一个list元素是否相同
+        if strs!= []:
+            s = r.index(False)
+            return strs[0][0:s]
+        else:
+            return ""
+        
