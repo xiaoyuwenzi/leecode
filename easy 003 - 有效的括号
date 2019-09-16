@@ -1,0 +1,12 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        Stack = []    #堆栈
+        mapping = {")":"(","}":"{","]":"["}   #设置字典
+        for st in s:
+            if st in mapping:                 #判断是否在字典的索引中
+                top_element = Stack.pop() if Stack else "#"  #删除堆栈中第一个字母，赋值给top_element
+                if top_element != mapping[st]:  #如果删除字符与mapping中字符不对应，说明括号顺序错误。
+                    return False
+            else:
+                Stack.append(st)    #直接在堆栈中增加括号
+        return not Stack            #如果堆栈为空，表明括号有效，否则，括号无效
