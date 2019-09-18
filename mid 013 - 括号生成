@@ -1,0 +1,18 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        Result = []
+        def backtrack(ans,left,right):
+            if len(ans) == 2*n:
+                Result.append(ans)
+                # print('\n')
+                # print(ans)
+            if left < n:
+                backtrack(ans+"(",left+1,right)
+                # print("1"+ans)
+                # print("left is %d" %left)
+            if left > right:
+                backtrack(ans+")",left,right+1)
+                # print("2"+ans)
+                # print("right is %d" %right)
+        backtrack('',0,0)
+        return Result
